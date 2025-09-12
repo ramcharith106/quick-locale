@@ -2,39 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Local Lens Travel App Design System */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 225 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 225 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 225 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Travel-inspired primary colors */
+    --primary: 220 91% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 220 91% 65%;
+    --primary-dark: 220 91% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Ocean-inspired secondary colors */
+    --secondary: 195 100% 95%;
+    --secondary-foreground: 220 91% 50%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 225 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warm accent for CTAs */
+    --accent: 25 95% 62%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 95% 75%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 91% 50%;
+
+    /* Travel-specific design tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(220 91% 50%), hsl(195 100% 65%));
+    --card-gradient: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 13% 98%));
+    --overlay-gradient: linear-gradient(180deg, transparent, hsl(0 0% 0% / 0.6));
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 4px 12px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 8px 25px hsl(0 0% 0% / 0.15);
+    --shadow-hero: 0 20px 40px hsl(220 91% 50% / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -100,6 +119,57 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Hero section styles */
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+
+  .card-gradient {
+    background: var(--card-gradient);
+  }
+
+  .overlay-gradient {
+    background: var(--overlay-gradient);
+  }
+
+  /* Custom shadows */
+  .shadow-hero {
+    box-shadow: var(--shadow-hero);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Animation utilities */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  /* Search input styling */
+  .search-input {
+    @apply w-full px-6 py-4 text-lg rounded-2xl border-2 border-border/50 bg-background/95 backdrop-blur-sm;
+    @apply focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20;
+    @apply placeholder:text-muted-foreground transition-smooth;
+  }
+
+  /* Result cards */
+  .result-card {
+    @apply bg-card rounded-xl overflow-hidden shadow-card hover:shadow-lg transition-smooth;
+    @apply hover:scale-[1.02] cursor-pointer;
+  }
+
+  /* Rating display */
+  .rating-display {
+    @apply inline-flex items-center gap-1 px-2 py-1 bg-accent text-accent-foreground text-sm font-medium rounded-full;
   }
 }
